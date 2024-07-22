@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+// import 'dart:developer';
+import 'dart:developer' as developer;
+
+class QuestionsSummary extends StatefulWidget {
+  const QuestionsSummary(this.summaryData, {super.key});
+  final List<Map<String, Object>> summaryData;
+  // Color indexColor() {
+  //   // if (flag) {
+  //   //   return Colors.amber;
+  //   // } else {
+  //   //   return Colors.amber;
+  //   // }
+  //   setState(() {});
+  // }
+  @override
+  State<QuestionsSummary> createState() {
+    return _QuestionsSummary();
+  }
+}
+
+class _QuestionsSummary extends State<QuestionsSummary> {
+  final bool flag = false;
+  final Color indexColor = Color.fromARGB(255, 241, 87, 202);
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      child: SingleChildScrollView(
+        child: Column(
+          children: widget.summaryData.map(
+            (data) {
+              return Row(children: [
+                //const print(data['question_index']),
+                //log(data['question_index'] as String);
+                // print(''),
+                Container(
+                  width: 30,
+                  height: 30,
+                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: Colors.pink,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    ((data['question_index'] as int) + 1).toString(),
+
+                    style: GoogleFonts.roboto(
+                      backgroundColor: Colors.blueGrey,
+                      //icon: const Icon(Icons.arrow_circle_right_outlined),
+                    ),
+
+                    // icon: const Icon(Icons.arrow_circle_right_outlined),
+                  ),
+                ),
+                // const SizedBox(height: 30),
+                Expanded(
+                  child: Column(
+                    children: [
+                      // const SizedBox(height: 30),
+                      Text(data['question'] as String),
+                      const SizedBox(height: 5),
+                      Text(data['user_answer'] as String),
+                      Text(data['correct_answer'] as String),
+                    ],
+                  ),
+                )
+              ]);
+            },
+          ).toList(),
+        ),
+      ),
+    );
+  }
+}
